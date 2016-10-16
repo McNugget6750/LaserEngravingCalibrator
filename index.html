@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <script>
+            function validateForm(){
+                var image = document.getElementById("image").value;
+                var name = document.getElementById("name").value;
+                if (image =='')
+                {
+                    return false;
+                }
+                if(name =='')
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                return false;
+            }
+        </script>
+    </head>
+
+    <body>
+        <form method="post" action="gcode.php" enctype="multipart/form-data">
+            <input type="text" value="40" name="laserPowerMin" size="8"/> Laser Min Power [Depending on you max setting in grbl]<br />
+            <input type="text" value="450" name="laserPowerMax" size="8"/> Laser Max Power [Depending on you max setting in grbl]<br />
+            <input type="text" value="0" name="laserPowerOff" size="8"/> Laser 'Off' Power [Depending on you max setting in grbl]<br />
+
+            <p><input type="text" value="3000" name="travelFeedRate" size="8"/> Travel (noncutting) Rate [mm/min]<br />
+            <input type="text" value="600" name="minFeedRate" size="8"/> Minimum Cutting FeedRate [mm/min]<br />
+            <input type="text" value="2500" name="maxFeedRate" size="8"/> Maximum Cutting FeedRate [mm/min]<br />
+
+            <p><input value="1" type="text" name="overScan" size="8"/> Overscan Distance (prevents twang from showing) [mm]<br />
+
+            <p><input value="0.1" type="text" name="resX" size="8"/> Horizontal Resolutiion [mm/pixel]<br />
+            <input value="0.1" type="text" name="resY" size="8"/> Vertical Resolution [mm/line]<br />
+
+			<p><input value="5" type="text" name="offsetX" size="8"/> Start Offset X [mm from X=0 for right of image]<br />
+            <input value="5" type="text" name="offsetY" size="8"/> Start Offset Y [mm from Y=0 for top of image]<br />
+            <input value="100" type="text" name="sizeX" size="8"/> Size X [Total Width Of Test Pattern]<br />
+            <input value="60" type="text" name="sizeY" size="8"/> Size Y [Total Height Of Test Pattern] <br />
+            <input value="8" type="text" name="patternSizeX" size="8"/> Test Pattern Size X [Width Of Single Test Pattern]<br />
+            <input value="5" type="text" name="patternSizeY" size="8"/> Test Pattern Size Y [Height Of Single Test Pattern] <br />
+
+            <p><input value="10" type="text" name="numLaserPower" size="8"/> Number Of Different Laser Power Values To Test<br />
+            <input value="10" type="text" name="numFeedRates" size="8"/> Number Of Different Feed Rate Steps To Test<br />
+
+            <p>Output:
+            <input type="radio" name="preview" value="0" checked="checked" > Gcode
+            <p><input type="submit" value='Save' onclick="return validateForm()"/>
+        </form>
+
+       <h3><a href="http://wiki.nebarnix.com/wiki/Img2gco">Full Documentation</a></h3>
+       <p> <b>About this tool:</b> This tool was created because I could not find any useable image to gcode converters suitable for lasers based on grbl.
+        It assumes that your laser is controlled using the variable spindle PWM pin and M3 (activate) and M5 (deactivate) as well as S[value] to control your laser. For your gCode senders sake I removed all the whitespaces in between codes. This greatly improves sending performance and you should be able to run higher speeds.</p>
+
+        <p> <b>Laser Power and Speed:</b>You should set laser min to a level just below where it makes a mark on
+        your given material and the laser max to a level where it makes a nice black mark and where increasing power does not make the mark any darker.
+        Trial and error is certainly required here, so please test your material BEFORE you ruin that nice thing you were trying to make.</p>
+
+        <p><b>A note on commands per second:</b> My grbl can handle quite a lot of commands per so that I can run at least 330 commands per second over USB. This strongly depends on the gCode sender which is system speed dependant if not pulled from an SD card. Please don't do anything major on your system while an image is engraved. It can leave ugly marks on your piece when the laser head suddenly stalls because it waits for the next command and the buffer ran empty. This is also a possible cause for fire!<br>
+        This is somewhat abstracted to this program only because commands can vary considerably in length.</p>
+    </body>
+</html>
