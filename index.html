@@ -51,9 +51,8 @@
             <p><input type="submit" value='Save' onclick="return validateForm()"/>
         </form>
 
-       <h3><a href="http://wiki.nebarnix.com/wiki/Img2gco">Full Documentation</a></h3>
-       <p> <b>About this tool:</b> This tool was created because I could not find any useable image to gcode converters suitable for lasers based on grbl.
-        It assumes that your laser is controlled using the variable spindle PWM pin and M3 (activate) and M5 (deactivate) as well as S[value] to control your laser. For your gCode senders sake I removed all the whitespaces in between codes. This greatly improves sending performance and you should be able to run higher speeds.</p>
+       <h3><a href="https://github.com/McNugget6750/LaserEngravingCalibrator">Github page</a></h3>
+       <p> <b>About this tool:</b> I developed with tool to test what happens if engraving speed and laser power are combined. The engraving depth is surprisingly similar when changing speeds with the same laser power. Especially when going too slow with too much power the resulting coal inhibits further engraving.</p>
 
         <p> <b>Laser Power and Speed:</b>You should set laser min to a level just below where it makes a mark on
         your given material and the laser max to a level where it makes a nice black mark and where increasing power does not make the mark any darker.
